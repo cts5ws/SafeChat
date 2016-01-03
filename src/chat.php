@@ -1,6 +1,7 @@
 <?php
     session_start();
 
+    //checks if session is v alid
     if(!isset($_SESSION["valid"])){
         $_SESSION["valid"] = "true";
     }
@@ -37,6 +38,7 @@
     <script>
         $(document).ready();
 
+        //wipes data on the front end and back end
         function wipeData(){
             $.ajax({
                 url : "wipe.php",
@@ -57,6 +59,7 @@
             });
         }
 
+        //counts characters and updates div
         function charCount() {
             var text = document.getElementById("message").value;
             var length = text.length;
@@ -67,6 +70,7 @@
         }
         window.setInterval(charCount, 250);
 
+        //checks with server script to get updated messages and renders them appropriately
         function refreshData() {
             $.ajax({
                 url: "updateData.php",
@@ -108,6 +112,7 @@
                             $(divTime).html(time);
                             $(divNum).html(num);
 
+                            //handles alignment based on the sender
                             if(real_name == name){
                                 $(divMessage).css({"font-weight": "bold", "text-align" : "right", "padding-right" : "25px"});
                                 $(divInfo).css({"font-weight": "bold", "text-align" : "left"});
@@ -124,10 +129,11 @@
         }
         window.setInterval(refreshData, 250);
 
-
+        //sends message to database and renders updated messages
         function sendMessage(){
             var text = document.getElementById("message").value;
 
+            //not being used currently
             var alert = "";
             if(text == ""){
                 alert = "Cannot send a blank message";
@@ -397,15 +403,12 @@
         </div>
     </table>
 
-    <td><input type="text" id="message" name="message" size="100" maxlength="110" onkeydown="if (event.keyCode == 13) document.getElementById('button').click()" autocomplete="off">
+    <input type="text" id="message" name="message" size="100" maxlength="110" onkeydown="if (event.keyCode == 13) document.getElementById('button').click()" autocomplete="off">
 
-
-        <button class="btn btn-primary" id="button" name="button" value="Send" onclick="sendMessage();">
-            <span class="glyphicon glyphicon-send"></span>
-        </button>
-
-        <div id="count" class="row col-center"><h4><span class="label label-default">Word Count: 0</span></h4></div>
-
+    <button class="btn btn-primary" id="button" name="button" value="Send" onclick="sendMessage();">
+        <span class="glyphicon glyphicon-send"></span>
+    </button>
+    <div id="count" class="row col-center"><h4><span class="label label-default">Word Count: 0</span></h4></div>
 </div>
 
 <div id="footer" class="mastfoot" style="text-align: center;" >
@@ -416,6 +419,5 @@
         </b><em>Copyright &copy; 2015 &middot; All rights reserved.</em>
     </div>
 </div>
-
 </body>
 </html>

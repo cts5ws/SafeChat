@@ -10,7 +10,7 @@
 
     $_SESSION["chat"] = $chat;
     $_SESSION["name"] = $name;
-    
+
 
     if(!mysql_num_rows(mysqli_query("SHOW TABLES LIKE '".`$chat`."'"))==1){
         //table doesn't exits

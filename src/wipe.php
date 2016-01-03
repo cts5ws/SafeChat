@@ -7,6 +7,7 @@
 
     $chat = $_SESSION["chat"];
 
+    //empties the table for the specified chat
     mysqli_query($con, "delete from `$chat`");
     mysqli_close($con);
 ?>
